@@ -49,8 +49,8 @@ data class AddNameScreen(val startColor: String,val endColor: String):Screen {
         ColorDetailScreen(
             startColor = startColor,
             endColor = endColor,
-            onSelectedCTA = { start,end->
-
+            onPreviewCTA = { name->
+                navigator.push(NamePreviewScreen(startColor = startColor, endColor = endColor, name = name))
             }
         )
 
@@ -62,11 +62,12 @@ data class AddNameScreen(val startColor: String,val endColor: String):Screen {
     fun ColorDetailScreen(
         startColor: String,
         endColor: String,
-        onSelectedCTA: (startColor:String, endColor:String) -> Unit
+        onPreviewCTA: (name:String) -> Unit
     ) {
-        // Parse the colors from hex string to Long
         val startColorParsed = Color(startColor.toLong(16) or 0xFF000000) // Ensure full opacity
         val endColorParsed = Color(endColor.toLong(16) or 0xFF000000) // Ensure full opacity
+
+        var name by remember { mutableStateOf("") }
 
         Column(
             modifier = Modifier
@@ -76,34 +77,19 @@ data class AddNameScreen(val startColor: String,val endColor: String):Screen {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            // Top Section: Title with navigation icon
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = "Add name",
-                    fontSize = 36.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White
-                )
-                Icon(
-                    imageVector = Icons.Default.ArrowForward,
-                    contentDescription = "Navigate",
-                    tint = Color.White,
-                    modifier = Modifier.clickable {
-                        onSelectedCTA(startColor, endColor)
-                    }
-                )
-            }
+            // Top Section: Title
+            Text(
+                text = "Add name",
+                fontSize = 36.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White,
+                modifier = Modifier.padding(top = 16.dp)
+            )
 
             // Input field for name
             TextField(
-                value = "",
-                onValueChange = { /* Handle name input */ },
+                value = name,
+                onValueChange = { name = it },
                 placeholder = {
                     Text(text = "Start typing...", color = Color.Gray)
                 },
@@ -113,11 +99,11 @@ data class AddNameScreen(val startColor: String,val endColor: String):Screen {
                 textStyle = TextStyle(fontSize = 18.sp, color = Color.White)
             )
 
-            // Card Display with selected colors
+            // Card Display with selected colors and name preview
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(280.dp)
+                    .height(450.dp)
                     .background(
                         brush = Brush.verticalGradient(
                             colors = listOf(startColorParsed, endColorParsed)
@@ -132,7 +118,7 @@ data class AddNameScreen(val startColor: String,val endColor: String):Screen {
                         .background(Color.White, shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
                 ) {
                     Text(
-                        text = "hello.",
+                        text = name,
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Bold,
                         color = Color.Black,
@@ -140,8 +126,28 @@ data class AddNameScreen(val startColor: String,val endColor: String):Screen {
                     )
                 }
             }
+
+            // Done Button
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 16.dp)
+                    .height(48.dp)
+                    .background(Color.Black, shape = RoundedCornerShape(24.dp))
+                    .clickable {
+                        onPreviewCTA(name)
+                    },
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "done",
+                    fontSize = 16.sp,
+                    color = Color.White
+                )
+            }
         }
     }
+
 
 
 

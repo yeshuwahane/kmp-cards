@@ -1,12 +1,8 @@
 
-<div align="center">
-
 # Kotlin Multiplatform
-  
-![Kard](https://raw.githubusercontent.com/yeshuwahane/kmp-cards/main/kcards.gif)
 
-</div>
 
+![Kard](https://raw.githubusercontent.com/yeshuwahane/kmp-cards/main/kardcs.png)
 
 
 Welcome to K-Cards 🎨✨, an open-source app designed and built entirely with Kotlin Multiplatform (KMP). 
@@ -30,3 +26,12 @@ Powered by Kotlin, it runs seamlessly across platforms, ensuring a consistent us
 - **Open Source**: Available for developers to explore, contribute, and improve.
 
 
+
+## 
+
+
+ <div align="center">
+   
+![Kard](https://raw.githubusercontent.com/yeshuwahane/kmp-cards/main/kcards.gif)
+
+</div>

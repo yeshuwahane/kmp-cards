@@ -1,6 +1,13 @@
-# Kotlin Multiplatform
 
-![AniKot](https://raw.githubusercontent.com/yeshuwahane/kmp-cards/main/kardcs.png)
+<div align="center">
+
+# Kotlin Multiplatform
+  
+![Kard](https://raw.githubusercontent.com/yeshuwahane/kmp-cards/main/kcards.gif)
+
+</div>
+
+
 
 Welcome to K-Cards 🎨✨, an open-source app designed and built entirely with Kotlin Multiplatform (KMP). 
 This app allows users to design and customize beautiful cards by selecting colors and personalizing content with smooth animations.
